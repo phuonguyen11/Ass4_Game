@@ -19,7 +19,7 @@ To set up the game UI, follow these steps:
   cmake -S . -B ./build -A Win32
 ```
 6. Use Visual Studio (preferably Visual Studio 2022) to compile the solution `Assignment4.sln`, located in the `build` directory.
-7. Upon successful compilation, Assignment4.exe will be generated. Execute this file to launch and enjoy the game!
+7. Upon successful compilation, `Assignment4.exe` will be generated. Execute this file to launch and enjoy the game!
 
 Running the Server
 
