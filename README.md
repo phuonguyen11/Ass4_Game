@@ -22,4 +22,5 @@ To set up the game UI, follow these steps:
 7. Upon successful compilation, Assignment4.exe will be generated. Execute this file to launch and enjoy the game!
 
 Running the Server
+
 To run the server, please refer to the README file located in the `Server` folder for instructions.
