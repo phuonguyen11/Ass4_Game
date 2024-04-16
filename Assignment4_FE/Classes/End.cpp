@@ -33,7 +33,6 @@
 
 USING_NS_CC;
 
-Label* label_2;
 int winner;
 
 Scene* End::createScene()
@@ -62,6 +61,7 @@ bool End::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto director = Director::getInstance();
 
+    Label* label_2;
     label_2 = Label::createWithTTF("End\nTouch anywhere to continue", "fonts/Marker Felt.ttf", 24);
     if (label_2 == nullptr)
     {

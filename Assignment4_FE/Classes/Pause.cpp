@@ -33,7 +33,6 @@
 
 USING_NS_CC;
 
-Label* label_2;
 
 Scene* Pause::createScene()
 {
@@ -60,7 +59,7 @@ bool Pause::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto director = Director::getInstance();
-
+    Label* label_2;
     label_2 = Label::createWithTTF("PAUSE\nTouch anywhere to continue", "fonts/Marker Felt.ttf", 24);
     if (label_2 == nullptr)
     {
