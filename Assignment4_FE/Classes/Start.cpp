@@ -33,7 +33,8 @@
 #include <sstream>
 #include <string>
 #include "Node.h"
-
+#include "cocos2d.h"
+using namespace cocos2d;
 USING_NS_CC;
 
 
@@ -58,10 +59,12 @@ bool Start::init()
     {
         return false;
     }
-    
+
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto director = Director::getInstance();
+    auto background = Sprite::create("Start.png");
+
     
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
@@ -77,6 +80,7 @@ bool Start::init()
     auto monte = MenuItemImage::create("item.png", "item.png", CC_CALLBACK_1(Start::callMonte, this));
 
     auto pvp = MenuItemImage::create("item.png", "item.png", CC_CALLBACK_1(Start::callPvp, this));
+
 
     if (closeItem == nullptr ||
         closeItem->getContentSize().width <= 0 ||
@@ -117,62 +121,74 @@ bool Start::init()
         pvp->setPosition(Vec2(x, y));
     };
     
+    if (background == nullptr)
+    {
+        problemLoading("'Start.png'");
+    }
+    else
+    {
+        // Set the position of the background to the center of the screen
+        background->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+        this->addChild(background, -1);
+    }
+
     // create menu, it's an autorelease object
     auto menu = Menu::create(closeItem, monte, pvp, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    auto label_PVP = Label::createWithTTF("PVP", "fonts/Marker Felt.ttf", 24);
+    auto label_PVP = Label::createWithTTF("PVP", "fonts/richela.otf", 32);
     if (label_PVP == nullptr)
     {
-        problemLoading("'fonts/Marker Felt.ttf'");
+        problemLoading("'fonts/richela.otf'");
     }
     else
     {
         // position the label_1 on the center of the screen
         label_PVP->setPosition(Vec2(origin.x + visibleSize.width / 2,
-            origin.y + visibleSize.height - label_PVP->getContentSize().height - 600));
+            origin.y + visibleSize.height - label_PVP->getContentSize().height - 575));
 
         // add the label_1 as a child to this layer
         this->addChild(label_PVP, 1);
     }
 
-    auto label_14 = Label::createWithTTF("MT", "fonts/Marker Felt.ttf", 24);
+    auto label_14 = Label::createWithTTF("MT", "fonts/richela.otf", 32);
     if (label_14 == nullptr)
     {
-        problemLoading("'fonts/Marker Felt.ttf'");
+        problemLoading("'fonts/richela.otf'");
     }
     else
     {
         // position the label_1 on the center of the screen
         label_14->setPosition(Vec2(origin.x + visibleSize.width / 2,
-            origin.y + visibleSize.height - label_14->getContentSize().height - 200));
+            origin.y + visibleSize.height - label_14->getContentSize().height - 175));
 
         // add the label_1 as a child to this layer
         this->addChild(label_14, 1);
     }
 
-    auto label_12 = Label::createWithTTF("Normal", "fonts/Marker Felt.ttf", 24);
+    auto label_12 = Label::createWithTTF("Normal", "fonts/richela.otf", 32);
     if (label_12 == nullptr)
     {
-        problemLoading("'fonts/Marker Felt.ttf'");
+        problemLoading("'fonts/richela.otf'");
     }
     else
     {
         // position the label_1 on the center of the screen
         label_12->setPosition(Vec2(origin.x + visibleSize.width / 2,
-            origin.y + visibleSize.height - label_12->getContentSize().height - 400));
+            origin.y + visibleSize.height - label_12->getContentSize().height - 375));
 
         // add the label_1 as a child to this layer
         this->addChild(label_12, 1);
     }
-    auto label_13 = Label::createWithTTF("Caro 9x9", "fonts/Marker Felt.ttf", 24);
+    auto label_13 = Label::createWithTTF("EASTER RACE", "fonts/richela.otf", 64);
     if (label_13 == nullptr)
     {
-        problemLoading("'fonts/Marker Felt.ttf'");
+        problemLoading("'fonts/richela.otf'");
     }
     else
     {
+        label_13->setTextColor(Color4B(6, 83, 116, 255));
         // position the label_1 on the center of the screen
         label_13->setPosition(Vec2(origin.x + visibleSize.width / 2,
             origin.y + visibleSize.height - label_13->getContentSize().height));

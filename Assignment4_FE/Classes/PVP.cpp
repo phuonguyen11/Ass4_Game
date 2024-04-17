@@ -52,7 +52,7 @@ bool PvpMode::init()
 
     this->ConnectToServerAndJoinRoom();
 
-    auto rule = Label::createWithTTF("Rule: player X go first", "fonts/Marker Felt.ttf", 24);
+    auto rule = Label::createWithTTF("Rule: player X go first", "fonts/richela.otf", 64);
     rule->setPosition(Vec2(120, 730));
     this->addChild(rule);
 
@@ -60,15 +60,15 @@ bool PvpMode::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto director = Director::getInstance();
 
-    this->label_turn = Label::createWithTTF("Wait for the opponent...", "fonts/Marker Felt.ttf", 24);
+    this->label_turn = Label::createWithTTF("Wait for the opponent...", "fonts/richela.otf", 64);
     this->label_turn->setPosition(Vec2(origin.x + visibleSize.width / 2,
         this->label_turn->getContentSize().height));
     this->addChild(this->label_turn);
 
-    this->label_PVP = Label::createWithTTF("PVP", "fonts/Marker Felt.ttf", 24);
+    this->label_PVP = Label::createWithTTF("PVP", "fonts/richela.otf", 64);
     if (this->label_PVP == nullptr)
     {
-        problemLoading("'fonts/Marker Felt.ttf'");
+        problemLoading("'fonts/richela.otf'");
     }
     else
     {
@@ -367,7 +367,7 @@ void PvpMode::swapTurn(SIOClient* client, const std::string& data) {
 void PvpMode::getType(SIOClient* client, const std::string& data) {
     if (std::stoi(data) == 1) {
         this->type = true;
-        auto lbl = Label::createWithTTF("You are player X", "fonts/Marker Felt.ttf", 24);
+        auto lbl = Label::createWithTTF("You are player X", "fonts/richela.otf", 64);
         lbl->setPosition(Vec2(100, 400));
         this->addChild(lbl);
 
@@ -375,7 +375,7 @@ void PvpMode::getType(SIOClient* client, const std::string& data) {
     }
     else {
         this->type = false;
-        auto lbl = Label::createWithTTF("You are player O", "fonts/Marker Felt.ttf", 24);
+        auto lbl = Label::createWithTTF("You are player O", "fonts/richela.otf", 64);
         lbl->setPosition(Vec2(100, 400));
         this->addChild(lbl);
 

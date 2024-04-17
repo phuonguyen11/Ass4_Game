@@ -60,10 +60,10 @@ bool Pause::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto director = Director::getInstance();
     Label* label_2;
-    label_2 = Label::createWithTTF("PAUSE\nTouch anywhere to continue", "fonts/Marker Felt.ttf", 24);
+    label_2 = Label::createWithTTF("PAUSE\nTouch anywhere to continue", "fonts/richela.otf", 64);
     if (label_2 == nullptr)
     {
-        problemLoading("'fonts/Marker Felt.ttf'");
+        problemLoading("'fonts/richela.otf'");
     }
     else
     {

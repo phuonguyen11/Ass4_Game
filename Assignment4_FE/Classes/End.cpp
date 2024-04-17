@@ -62,10 +62,10 @@ bool End::init()
     auto director = Director::getInstance();
 
     Label* label_2;
-    label_2 = Label::createWithTTF("End\nTouch anywhere to continue", "fonts/Marker Felt.ttf", 24);
+    label_2 = Label::createWithTTF("End\nTouch anywhere to continue", "fonts/richela.otf", 64);
     if (label_2 == nullptr)
     {
-        problemLoading("'fonts/Marker Felt.ttf'");
+        problemLoading("'fonts/richela.otf'");
     }
     else
     {

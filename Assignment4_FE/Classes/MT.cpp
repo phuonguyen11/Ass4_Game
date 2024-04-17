@@ -73,10 +73,10 @@ bool MT::init()
     auto director = Director::getInstance();
 
     turn = false;
-    label = Label::createWithTTF("Monte Calo", "fonts/Marker Felt.ttf", 24);
+    label = Label::createWithTTF("Monte Calo", "fonts/richela.otf", 32);
     if (label == nullptr)
     {
-        problemLoading("'fonts/Marker Felt.ttf'");
+        problemLoading("'fonts/richela.otf'");
     }
     else
     {

@@ -66,10 +66,10 @@ bool HelloWorld::init()
     auto director = Director::getInstance();
 
     turn_1 = false;
-    label_1 = Label::createWithTTF("Normal", "fonts/Marker Felt.ttf", 24);
+    label_1 = Label::createWithTTF("Normal", "fonts/richela.otf", 32);
     if (label_1 == nullptr)
     {
-        problemLoading("'fonts/Marker Felt.ttf'");
+        problemLoading("'fonts/richela.otf'");
     }
     else
     {

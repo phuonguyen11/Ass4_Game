@@ -1,0 +1,8 @@
+# Ignore the node_modules folder
+/Server/node_modules
+
+# Ignore the package-lock.json file
+/Server/package-lock.json
+
+# Ignore the build folder
+/Assignment4_FE/build
