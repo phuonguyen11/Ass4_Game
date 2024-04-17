@@ -71,6 +71,8 @@ bool Start::init()
     //    you may modify it.
 
     // add a "close" icon to exit the progress. it's an autorelease object
+
+    auto continueMode = MenuItemImage::create("item.png", "item.png");
     
     auto closeItem = MenuItemImage::create(
                                            "item.png",
@@ -80,6 +82,19 @@ bool Start::init()
     auto monte = MenuItemImage::create("item.png", "item.png", CC_CALLBACK_1(Start::callMonte, this));
 
     auto pvp = MenuItemImage::create("item.png", "item.png", CC_CALLBACK_1(Start::callPvp, this));
+
+    if (continueMode == nullptr ||
+        continueMode->getContentSize().width <= 0 ||
+        continueMode->getContentSize().height <= 0)
+    {
+        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
+    }
+    else
+    {
+        float x = origin.x + visibleSize.width / 2;
+        float y = origin.y + continueMode->getContentSize().height/2 + 410;
+        continueMode->setPosition(Vec2(x,y));
+    }
 
 
     if (closeItem == nullptr ||
@@ -91,7 +106,7 @@ bool Start::init()
     else
     {
         float x = origin.x + visibleSize.width / 2;
-        float y = origin.y + closeItem->getContentSize().height/2 + 510;
+        float y = origin.y + closeItem->getContentSize().height/2 + 310;
         closeItem->setPosition(Vec2(x,y));
     }
 
@@ -104,7 +119,7 @@ bool Start::init()
     else
     {
         float x = origin.x + visibleSize.width / 2;
-        float y = origin.y + monte->getContentSize().height / 2 + 310;
+        float y = origin.y + monte->getContentSize().height / 2 + 210;
         monte->setPosition(Vec2(x, y));
     };
 
@@ -133,7 +148,7 @@ bool Start::init()
     }
 
     // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, monte, pvp, NULL);
+    auto menu = Menu::create(continueMode, closeItem, monte, pvp, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
@@ -161,7 +176,7 @@ bool Start::init()
     {
         // position the label_1 on the center of the screen
         label_14->setPosition(Vec2(origin.x + visibleSize.width / 2,
-            origin.y + visibleSize.height - label_14->getContentSize().height - 175));
+            origin.y + visibleSize.height - label_14->getContentSize().height - 475));
 
         // add the label_1 as a child to this layer
         this->addChild(label_14, 1);
@@ -181,6 +196,25 @@ bool Start::init()
         // add the label_1 as a child to this layer
         this->addChild(label_12, 1);
     }
+
+    auto label_ContinueMode = Label::createWithTTF("Continue", "fonts/richela.otf", 32);
+    if (label_ContinueMode == nullptr)
+    {
+        problemLoading("'fonts/richela.otf'");
+    }
+    else
+    {
+        // position the label_1 on the center of the screen
+        label_ContinueMode->setTextColor(Color4B(255, 195, 41, 255));
+
+        label_ContinueMode->setPosition(Vec2(origin.x + visibleSize.width / 2,
+            origin.y + visibleSize.height - label_ContinueMode->getContentSize().height - 275));
+
+        // add the label_1 as a child to this layer
+        this->addChild(label_ContinueMode, 1);
+    }
+
+
     auto label_13 = Label::createWithTTF("EASTER RACE", "fonts/richela.otf", 64);
     if (label_13 == nullptr)
     {
@@ -253,4 +287,9 @@ void Start::callNormal(Ref* pSender) {
 void Start::callPvp(Ref* pSender) {
     auto pvp = PvpMode::createScene();
     Director::getInstance()->replaceScene(pvp);
+}
+
+void Start::callContinue(Ref* pSender) {
+    auto continueMode = PvpMode::createScene();
+    Director::getInstance()->replaceScene(continueMode);
 }

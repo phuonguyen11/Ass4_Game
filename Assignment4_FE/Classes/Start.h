@@ -45,7 +45,8 @@ public:
     void callNormal(cocos2d::Ref* pSender);
     void callMonte(cocos2d::Ref* pSender);
     void callPvp(cocos2d::Ref* pSender);
-    
+    void callContinue(cocos2d::Ref* pSender);
+
     // implement the "static create()" method manually
     CREATE_FUNC(Start);
 };
