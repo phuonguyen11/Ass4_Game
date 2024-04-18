@@ -203,7 +203,7 @@ bool PvpMode::init()
         for (int j = 0; j < 9; j++) {
             auto button = ui::Button::create();
             button->loadTextureNormal("normal.png");
-            button->setTitleText("Button Text");
+            button->setTitleText("");
             button->setPosition(Vec2(start_pos_x + this->size_of_caro * j, start_pos_y));
             button->addClickEventListener([=](Ref* sender) {
                 // Get the position of the button when clicked
@@ -277,10 +277,10 @@ bool PvpMode::init()
     this->addChild(this->menu_PVP, 2);
     this->menu_PVP->setVisible(false);
     ////////////// BOARD
-    auto grid = Sprite::create("grid.png");
+    auto grid = Sprite::create("grid_update.png");
     if (grid == nullptr)
     {
-        problemLoading("'grid.png'");
+        problemLoading("'grid_update.png'");
     }
     else
     {

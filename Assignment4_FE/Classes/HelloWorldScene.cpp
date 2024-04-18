@@ -210,7 +210,7 @@ bool HelloWorld::init()
         for (int j = 0; j < 9; j++) {
             auto button = ui::Button::create();
             button->loadTextureNormal("normal.png");
-            button->setTitleText("Button Text");
+            button->setTitleText("");
             button->setPosition(Vec2(start_pos_x + size_of_caro * j, start_pos_y));
             button->addTouchEventListener(CC_CALLBACK_2(HelloWorld::touchHandler, this, i, j));
             this->addChild(button, 1);
@@ -222,8 +222,8 @@ bool HelloWorld::init()
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
             auto button = ui::Button::create();
-            button->loadTextureNormal("normal.png");
-            button->setTitleText("Button Text");
+            button->loadTextureNormal("normal.png", D3DCOLOR_XRGB(255,0,255));
+            button->setTitleText("");
             button->setPosition(Vec2(start_pos_x + size_of_caro * j, start_pos_y));
             button->addTouchEventListener([i, j, checkWinner, fireEvent, randommove](Ref* sender, ui::Widget::TouchEventType type) {
                 auto temp = dynamic_cast<ui::Button*>(sender);
@@ -337,10 +337,10 @@ bool HelloWorld::init()
     return_1 true;
     */
     ////////////// BOARD
-    auto grid = Sprite::create("grid.png");
+    auto grid = Sprite::create("grid_update.png");
     if(grid == nullptr)
     {
-        problemLoading("'grid.png'");
+        problemLoading("'grid_update.png'");
     }
     else
     {
