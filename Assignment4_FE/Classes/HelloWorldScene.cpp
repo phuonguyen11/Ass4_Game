@@ -101,7 +101,7 @@ bool HelloWorld::init()
         if (t) temp = 1;
         else temp = -1;
         board_number_1[row][col] = temp;
-        std::string s = t ? "X" : "O";
+        std::string s = t ? "Chicken" : "Bunny";
         //int temp = board_number_1[row][col];
 
         //////////////-----------Vertical check
@@ -116,7 +116,7 @@ bool HelloWorld::init()
             else left_half++;
         }
         if (right_half + left_half >= 4) {
-            label_1->setString(s + " win!");
+            label_1->setString(s + " has collected all the eggs!");
             menu_1->setVisible(true);
             return true;
         }
@@ -134,7 +134,7 @@ bool HelloWorld::init()
             else left_half++;
         }
         if (right_half + left_half >= 4) {
-            label_1->setString(s + " win!");
+            label_1->setString(s + " has collected all the eggs!");
             menu_1->setVisible(true);
             return true;
         }
@@ -152,7 +152,7 @@ bool HelloWorld::init()
             else left_half++;
         }
         if (right_half + left_half >= 4) {
-            label_1->setString(s + " win!");
+            label_1->setString(s + " has collected all the eggs!");
             menu_1->setVisible(true);
             return true;
         }
@@ -169,7 +169,7 @@ bool HelloWorld::init()
             else left_half++;
         }
         if (right_half + left_half >= 4) {
-            label_1->setString(s + " win!");
+            label_1->setString(s + " has collected all the eggs!");
             menu_1->setVisible(true);
             return true;
         }
@@ -209,7 +209,8 @@ bool HelloWorld::init()
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
             auto button = ui::Button::create();
-            button->loadTextureNormal("normal.png");
+                        button->loadTextureNormal("normal.png");
+            button->setOpacity(0);
             button->setTitleText("");
             button->setPosition(Vec2(start_pos_x + size_of_caro * j, start_pos_y));
             button->addTouchEventListener(CC_CALLBACK_2(HelloWorld::touchHandler, this, i, j));
@@ -223,6 +224,7 @@ bool HelloWorld::init()
         for (int j = 0; j < 9; j++) {
             auto button = ui::Button::create();
             button->loadTextureNormal("normal.png");
+            button->setOpacity(0);
             button->setTitleText("");
             button->setPosition(Vec2(start_pos_x + size_of_caro * j, start_pos_y));
             button->addTouchEventListener([i, j, checkWinner, fireEvent, randommove](Ref* sender, ui::Widget::TouchEventType type) {
@@ -230,12 +232,12 @@ bool HelloWorld::init()
                 if (type == ui::Widget::TouchEventType::ENDED)
                 {
                     //logic win/lose, turn_1 around, send location
-                    if(turn_1) temp->loadTextureDisabled("x.png");
-                    else temp->loadTextureDisabled("o.png");
-                    //temp->loadTextureDisabled("o.png");
+                    if(turn_1) temp->loadTextureDisabled("chick.png");
+                    else temp->loadTextureDisabled("bunny.png");
+                    temp->getRendererDisabled()->setOpacity(255);
+                    //temp->loadTextureDisabled("bunny.png");
                     temp->setEnabled(false);
                     //text_label_1 << i << "," << j << ";";
-                    temp->setTitleText(std::to_string(i) + ";" + std::to_string(j));
                     temp->setTitleColor(Color3B::BLACK);
                     if (checkWinner(i, j, turn_1)) return;
                     turn_1 = !turn_1;
@@ -247,12 +249,12 @@ bool HelloWorld::init()
                     
                     temp = button_grid_1[(move[0] * 9) + (move[1] + 1) - 1];
                     //temp = button_grid_1[4];
-                    if (turn_1) temp->loadTextureDisabled("x.png");
-                    else temp->loadTextureDisabled("o.png");
-                    //temp->loadTextureDisabled("o.png");
+                    if (turn_1) temp->loadTextureDisabled("chick.png");
+                    else temp->loadTextureDisabled("bunny.png");
+                    temp->getRendererDisabled()->setOpacity(255);
+                    //temp->loadTextureDisabled("bunny.png");
                     temp->setEnabled(false);
                     //text_label_1 << i << "," << j << ";";
-                    temp->setTitleText(std::to_string(move[0]) + ";" + std::to_string(move[1]));
                     temp->setTitleColor(Color3B::BLACK);
                     checkWinner(move[0], move[1], turn_1);
                     turn_1 = !turn_1;

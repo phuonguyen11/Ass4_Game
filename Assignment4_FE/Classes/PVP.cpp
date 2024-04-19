@@ -93,7 +93,7 @@ bool PvpMode::init()
         if (t) temp = 1;
         else temp = -1;
         this->board_number_PVP[row][col] = temp;
-        std::string s = t ? "X" : "O";
+        std::string s = t ? "Chicken" : "Bunny";
         //int temp = this->board_number_PVP[row][col];
 
         //////////////-----------Vertical check
@@ -203,16 +203,17 @@ bool PvpMode::init()
         for (int j = 0; j < 9; j++) {
             auto button = ui::Button::create();
             button->loadTextureNormal("normal.png");
+            button->setOpacity(0);
             button->setTitleText("");
             button->setPosition(Vec2(start_pos_x + this->size_of_caro * j, start_pos_y));
             button->addClickEventListener([=](Ref* sender) {
                 // Get the position of the button when clicked
                 if (this->turn) {
                     int winner = 0;
-                    if (this->type) button->loadTextureDisabled("x.png");
-                    else button->loadTextureDisabled("o.png");
+                    if (this->type) button->loadTextureDisabled("chick.png");
+                    else button->loadTextureDisabled("bunny.png");
+                    button->getRendererDisabled()->setOpacity(255);
                     button->setEnabled(false);
-                    button->setTitleText(std::to_string(i) + ";" + std::to_string(j));
                     button->setTitleColor(Color3B::BLACK);
                     if (checkWinner(i, j, (this->type ? 1 : 0), winner)) {
                         returnWinner(winner);
@@ -341,10 +342,10 @@ void PvpMode::loadState(SIOClient* client, const std::string& pos) {
     for (const auto& button : this->buttonCollection) {
         if (button->getBoundingBox().containsPoint(Vec2(currposX, currposY))) {
             if (!this->type) {
-                button->loadTextureNormal("x.png");
+                button->loadTextureNormal("chick.png");
             }
             else {
-                button->loadTextureNormal("o.png");
+                button->loadTextureNormal("bunny.png");
             };
             button->setTouchEnabled(false);
             button->setTitleColor(Color3B::BLACK);
@@ -402,7 +403,7 @@ void PvpMode::returnWinner(int player) {
 
 void PvpMode::showWinner(SIOClient* client, const std::string& player) {
     if ((this->type && player[1] == '1') || (!this->type && player[1] == '0')) {
-        this->label_PVP->setString("You win!");
+        this->label_PVP->setString("You has collected all the eggs!");
     }
     else {
         this->label_PVP->setString("You lose!");

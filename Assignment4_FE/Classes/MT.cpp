@@ -108,7 +108,7 @@ bool MT::init()
         if (t) temp = 1;
         else temp = -1;
         board_number[row][col] = temp;
-        std::string s = t ? "X" : "O";
+        std::string s = t ? "Chicken" : "Bunny";
         //int temp = board_number[row][col];
 
         //////////////-----------Vertical check
@@ -123,7 +123,7 @@ bool MT::init()
             else left_half++;
         }
         if (right_half + left_half >= 4) {
-            label->setString(s + " win!");
+            label->setString(s + " has collected all the eggs!");
             menu_2->setVisible(true);
             return true;
         }
@@ -140,7 +140,7 @@ bool MT::init()
             else left_half++;
         }
         if (right_half + left_half >= 4) {
-            label->setString(s + " win!");
+            label->setString(s + " has collected all the eggs!");
             menu_2->setVisible(true);
             return true;
         }
@@ -157,7 +157,7 @@ bool MT::init()
             else left_half++;
         }
         if (right_half + left_half >= 4) {
-            label->setString(s + " win!");
+            label->setString(s + " has collected all the eggs!");
             menu_2->setVisible(true);
             return true;
         }
@@ -174,7 +174,7 @@ bool MT::init()
             else left_half++;
         }
         if (right_half + left_half >= 4) {
-            label->setString(s + " win!");
+            label->setString(s + " has collected all the eggs!");
             menu_2->setVisible(true);
             return true;
         }
@@ -203,7 +203,8 @@ bool MT::init()
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
             auto button = ui::Button::create();
-            button->loadTextureNormal("normal.png");
+                        button->loadTextureNormal("normal.png");
+            button->setOpacity(0);
             button->setTitleText("");
             button->setPosition(Vec2(start_pos_x + size_of_caro * j, start_pos_y));
             button->addTouchEventListener(CC_CALLBACK_2(MT::touchHandler, this, i, j));
@@ -217,6 +218,7 @@ bool MT::init()
         for (int j = 0; j < 9; j++) {
             auto button = ui::Button::create();
             button->loadTextureNormal("normal.png");
+            button->setOpacity(0);
             button->setTitleText("");
             button->setPosition(Vec2(start_pos_x + size_of_caro * j, start_pos_y));
             button->addTouchEventListener([i, j, checkWinner, fireEvent](Ref* sender, ui::Widget::TouchEventType type) {
@@ -224,12 +226,13 @@ bool MT::init()
                 if (type == ui::Widget::TouchEventType::ENDED)
                 {
                     //logic win/lose, turn around, send location
-                    if(turn) temp->loadTextureDisabled("x.png");
-                    else temp->loadTextureDisabled("o.png");
-                    //temp->loadTextureDisabled("o.png");
+
+                    if(turn) temp->loadTextureDisabled("chick.png");
+                    else temp->loadTextureDisabled("bunny.png");
+                    temp->getRendererDisabled()->setOpacity(255);
+                    //temp->loadTextureDisabled("bunny.png");
                     temp->setEnabled(false);
                     //text_label << i << "," << j << ";";
-                    temp->setTitleText(std::to_string(i) + ";" + std::to_string(j));
                     temp->setTitleColor(Color3B::BLACK);
                     if(checkWinner(i, j, turn)) return;
                     turn = !turn;
@@ -238,7 +241,6 @@ bool MT::init()
                     int** board = new int* [9];
                     for (int row = 0; row < 9; ++row) {
                         board[row] = new int[9];
-
                         for (int col = 0; col < 9; ++col) {
                             board[row][col] = board_number[row][col];
                         }
@@ -252,12 +254,12 @@ bool MT::init()
                     board = nullptr;
                     temp = button_grid[(move[0] * 9) + (move[1] + 1) - 1];
                     //temp = button_grid[4];
-                    if (turn) temp->loadTextureDisabled("x.png");
-                    else temp->loadTextureDisabled("o.png");
-                    //temp->loadTextureDisabled("o.png");
+                    if (turn) temp->loadTextureDisabled("chick.png");
+                    else temp->loadTextureDisabled("bunny.png");
+                    temp->getRendererDisabled()->setOpacity(255);
+                    //temp->loadTextureDisabled("bunny.png");
                     temp->setEnabled(false);
                     //text_label << i << "," << j << ";";
-                    temp->setTitleText(std::to_string(move[0]) + ";" + std::to_string(move[1]));
                     temp->setTitleColor(Color3B::BLACK);
                     checkWinner(move[0], move[1], turn);
                     turn = !turn;
@@ -394,8 +396,6 @@ void MT::menuCloseCallback(Ref* pSender)
 
     //EventCustom customEndEvent("game_scene_close_event");
     //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
 }
 
 void MT::newgame(Ref* s) {
