@@ -24,6 +24,8 @@
 #include "Pause.h"
 #include "Start.h"
 #include "Node.h"
+#include "End.h"
+
 
 USING_NS_CC;
 
@@ -297,7 +299,7 @@ bool HelloWorld::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    auto end = MenuItemImage::create("end.png", "end.png", CC_CALLBACK_1(HelloWorld::newGame, this));
+    auto end = MenuItemImage::create("item.png", "item.png", CC_CALLBACK_1(HelloWorld::newGame, this));
     if (end == nullptr ||
         end->getContentSize().width <= 0 ||
         end->getContentSize().height <= 0)
@@ -370,7 +372,7 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 }
 
 void HelloWorld::newGame(cocos2d::Ref* s) {
-    //auto newgame = Start::createScene();
-    //Director::getInstance()->replaceScene(newgame);
-    return;
+    auto newgame = End::createScene();
+    Director::getInstance()->replaceScene(newgame);
+    // return;
 }

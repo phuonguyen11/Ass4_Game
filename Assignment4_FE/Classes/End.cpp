@@ -21,6 +21,7 @@
  ****************************************************************************/
 
 #include "End.h"
+#include "Start.h"
 #include "ui/CocosGUI.h"
 #include "ui/UIWidget.h"
 
@@ -30,6 +31,8 @@
 
 #include "network/WebSocket.h"
 #include "network/SocketIO.h"
+#include "cocos2d.h"
+using namespace cocos2d;
 
 USING_NS_CC;
 
@@ -61,8 +64,41 @@ bool End::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto director = Director::getInstance();
 
+    auto sprite = Sprite::create("end_upgrade.png");
+
+    if (sprite == nullptr)
+    {
+        problemLoading("'end_upgrade.png'");
+    }
+    else
+    {
+        // position the sprite on the center of the screen
+        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+
+        // add the sprite as a child to this layer
+        this->addChild(sprite, 0);
+    }
+    auto label_13 = Label::createWithTTF("HAPPY EASTER DAY!", "fonts/richela.otf", 64);
+    if (label_13 == nullptr)
+    {
+        problemLoading("'fonts/richela.otf'");
+    }
+    else
+    {
+        label_13->setTextColor(Color4B(6, 83, 116, 255));
+        // position the label_1 on the center of the screen
+        label_13->setPosition(Vec2(origin.x + visibleSize.width / 2,
+            origin.y + visibleSize.height - label_13->getContentSize().height));
+
+        // add the label_1 as a child to this layer
+        this->addChild(label_13, 1);
+    }
+
+
+
+
     Label* label_2;
-    label_2 = Label::createWithTTF("End\nTouch anywhere to continue", "fonts/richela.otf", 64);
+    label_2 = Label::createWithTTF("Back To Menu", "fonts/richela.otf", 32);
     if (label_2 == nullptr)
     {
         problemLoading("'fonts/richela.otf'");
@@ -71,33 +107,68 @@ bool End::init()
     {
         // position the label_2 on the center of the screen
         label_2->setPosition(Vec2(origin.x + visibleSize.width / 2,
-            origin.y + visibleSize.height / 2));
+            origin.y + visibleSize.height/2 - label_2->getContentSize().height + 210));
 
         // add the label_2 as a child to this layer
         this->addChild(label_2, 2);
     }
 
-    
+    Label* label_3;
+    label_3 = Label::createWithTTF("Quit", "fonts/richela.otf", 32);
+    if (label_3 == nullptr)
+    {
+        problemLoading("'fonts/richela.otf'");
+    }
+    else
+    {
+        // position the label_2 on the center of the screen
+        label_3->setPosition(Vec2(origin.x + visibleSize.width / 2,
+            origin.y + visibleSize.height/2 - label_2->getContentSize().height + 85));
+
+        // add the label_2 as a child to this layer
+        this->addChild(label_3, 2);
+    }
+
+    auto newItem = MenuItemImage::create(
+                                           "item.png",
+                                           "item.png",
+                                           CC_CALLBACK_1(End::menuNewGame, this));
+
+    if (newItem == nullptr ||
+        newItem->getContentSize().width <= 0 ||
+        newItem->getContentSize().height <= 0)
+    {
+        problemLoading("'item.png'");
+    }
+    else
+    {
+        float x = origin.x + visibleSize.width / 2;
+        float y = origin.y + visibleSize.height / 2 + 175;
+        newItem->setPosition(Vec2(x,y));
+    }
+
+
     auto closeItem = MenuItemImage::create(
-                                           "End.png",
-                                           "End.png",
+                                           "item.png",
+                                           "item.png",
                                            CC_CALLBACK_1(End::menuCloseCallback, this));
 
     if (closeItem == nullptr ||
         closeItem->getContentSize().width <= 0 ||
         closeItem->getContentSize().height <= 0)
     {
-        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
+        problemLoading("'item.png'");
     }
     else
     {
         float x = origin.x + visibleSize.width / 2;
-        float y = origin.y + visibleSize.height / 2;
+        float y = origin.y + visibleSize.height / 2 + 50;
         closeItem->setPosition(Vec2(x,y));
     }
 
+
     // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
+    auto menu = Menu::create(newItem, closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
@@ -110,19 +181,6 @@ bool End::init()
 
 
     // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }
     return_1 true;
     */
     ////////////// BOARD
@@ -141,10 +199,13 @@ void End::menuCloseCallback(Ref* pSender)
 
     //EventCustom customEndEvent("game_scene_close_event");
     //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
 }
 
+void End::menuNewGame(cocos2d::Ref* s) {
+    auto newgame = Start::createScene();
+    Director::getInstance()->replaceScene(newgame);
+    // return;
+}
 
 
 
