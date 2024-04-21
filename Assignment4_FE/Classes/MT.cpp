@@ -23,6 +23,7 @@
  ****************************************************************************/
 
 #include "MT.h"
+#include "End.h"
 #include "Pause.h"
 #include "ui/CocosGUI.h"
 #include "ui/UIWidget.h"
@@ -45,6 +46,7 @@ std::vector<std::vector<Vec2>> caro_position;
 std::vector<ui::Button*> button_grid;
 Label* label;
 Menu* menu_2;
+
 
 Scene* MT::createScene()
 {
@@ -350,7 +352,7 @@ bool MT::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    auto end = MenuItemImage::create("end.png", "end.png", CC_CALLBACK_1(MT::newgame, this));
+    auto end = MenuItemImage::create("end.png", "end.png", CC_CALLBACK_1(MT::newGame, this));
     if (end == nullptr ||
         end->getContentSize().width <= 0 ||
         end->getContentSize().height <= 0)
@@ -398,7 +400,9 @@ void MT::menuCloseCallback(Ref* pSender)
     //_eventDispatcher->dispatchEvent(&customEndEvent);
 }
 
-void MT::newgame(Ref* s) {
-    return;
-}
 
+void MT::newGame(cocos2d::Ref* s) {
+    auto newgame = End::createScene();
+    Director::getInstance()->replaceScene(newgame);
+    // return;
+}

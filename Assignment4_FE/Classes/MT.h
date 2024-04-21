@@ -45,7 +45,7 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(MT);
-    void newgame(cocos2d::Ref* s);
+    void newGame(cocos2d::Ref* s);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

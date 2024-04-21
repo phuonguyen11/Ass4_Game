@@ -24,6 +24,7 @@ THE SOFTWARE.
 #include "Pause.h"
 #include "Start.h"
 #include "Node.h"
+#include "End.h"
 
 const int grid_pos_x = 0;
 const int grid_pos_y = 0;
@@ -304,12 +305,12 @@ void PvpMode::menuCloseCallback(Ref* pSender)
     _client->emit("pause", pauseData);
 }
 
-void PvpMode::newGame(cocos2d::Ref* s) {
-    //auto newgame = Start::createScene();
-    //Director::getInstance()->replaceScene(newgame);
-    return;
-};
 
+void PvpMode::newGame(cocos2d::Ref* s) {
+    auto newgame = End::createScene();
+    Director::getInstance()->replaceScene(newgame);
+    // return;
+}
 void PvpMode::onConnect(SIOClient* client) {
     // SocketIO::connect success
 }
