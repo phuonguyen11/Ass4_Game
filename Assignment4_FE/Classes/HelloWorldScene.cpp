@@ -299,12 +299,12 @@ bool HelloWorld::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    auto end = MenuItemImage::create("item.png", "item.png", CC_CALLBACK_1(HelloWorld::newGame, this));
+    auto end = MenuItemImage::create("end.png", "end.png", CC_CALLBACK_1(HelloWorld::newGame, this));
     if (end == nullptr ||
         end->getContentSize().width <= 0 ||
         end->getContentSize().height <= 0)
     {
-        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
+        problemLoading("'end.png'");
     }
     else
     {
