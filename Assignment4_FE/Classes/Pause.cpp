@@ -59,21 +59,6 @@ bool Pause::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto director = Director::getInstance();
-    Label* label_2;
-    label_2 = Label::createWithTTF("PAUSE\nTouch anywhere to continue", "fonts/richela.otf", 64);
-    if (label_2 == nullptr)
-    {
-        problemLoading("'fonts/richela.otf'");
-    }
-    else
-    {
-        // position the label_2 on the center of the screen
-        label_2->setPosition(Vec2(origin.x + visibleSize.width / 2,
-            origin.y + visibleSize.height / 2));
-
-        // add the label_2 as a child to this layer
-        this->addChild(label_2, 2);
-    }
 
     
     auto closeItem = MenuItemImage::create(
