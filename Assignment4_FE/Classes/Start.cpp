@@ -167,7 +167,7 @@ bool Start::init()
         this->addChild(label_PVP, 1);
     }
 
-    auto label_14 = Label::createWithTTF("MT", "fonts/richela.otf", 32);
+    auto label_14 = Label::createWithTTF("Monte Carlo", "fonts/richela.otf", 32);
     if (label_14 == nullptr)
     {
         problemLoading("'fonts/richela.otf'");

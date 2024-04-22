@@ -75,7 +75,7 @@ bool MT::init()
     auto director = Director::getInstance();
 
     turn = false;
-    label = Label::createWithTTF("Monte Calo", "fonts/richela.otf", 32);
+    label = Label::createWithTTF("Monte Carlo", "fonts/richela.otf", 32);
     if (label == nullptr)
     {
         problemLoading("'fonts/richela.otf'");

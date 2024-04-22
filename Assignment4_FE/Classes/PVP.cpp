@@ -53,20 +53,20 @@ bool PvpMode::init()
 
     this->ConnectToServerAndJoinRoom();
 
-    auto rule = Label::createWithTTF("Rule: player X go first", "fonts/richela.otf", 64);
-    rule->setPosition(Vec2(120, 730));
-    this->addChild(rule);
+    // auto rule = Label::createWithTTF("Rule: player X go first", "fonts/richela.otf", 32);
+    // rule->setPosition(Vec2(120, 730));
+    // this->addChild(rule);
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto director = Director::getInstance();
 
-    this->label_turn = Label::createWithTTF("Wait for the opponent...", "fonts/richela.otf", 64);
+    this->label_turn = Label::createWithTTF("Wait for the opponent...", "fonts/richela.otf", 32);
     this->label_turn->setPosition(Vec2(origin.x + visibleSize.width / 2,
         this->label_turn->getContentSize().height));
     this->addChild(this->label_turn);
 
-    this->label_PVP = Label::createWithTTF("PVP", "fonts/richela.otf", 64);
+    this->label_PVP = Label::createWithTTF("PVP", "fonts/richela.otf", 32);
     if (this->label_PVP == nullptr)
     {
         problemLoading("'fonts/richela.otf'");
@@ -211,8 +211,8 @@ bool PvpMode::init()
                 // Get the position of the button when clicked
                 if (this->turn) {
                     int winner = 0;
-                    if (this->type) button->loadTextureDisabled("chick.png");
-                    else button->loadTextureDisabled("bunny.png");
+                    if (this->type) button->loadTextureDisabled("chick_pvp.png");
+                    else button->loadTextureDisabled("bunny_pvp.png");
                     button->getRendererDisabled()->setOpacity(255);
                     button->setEnabled(false);
                     button->setTitleColor(Color3B::BLACK);
@@ -343,10 +343,12 @@ void PvpMode::loadState(SIOClient* client, const std::string& pos) {
     for (const auto& button : this->buttonCollection) {
         if (button->getBoundingBox().containsPoint(Vec2(currposX, currposY))) {
             if (!this->type) {
-                button->loadTextureNormal("chick.png");
+                button->loadTextureNormal("chick_pvp.png");
+                button->setOpacity(255);
             }
             else {
-                button->loadTextureNormal("bunny.png");
+                button->loadTextureNormal("bunny_pvp.png");
+                button->setOpacity(255);
             };
             button->setTouchEnabled(false);
             button->setTitleColor(Color3B::BLACK);
@@ -362,6 +364,7 @@ void PvpMode::swapTurn(SIOClient* client, const std::string& data) {
     }
     else {
         this->turn = false;
+
         this->label_turn->setString("Wait for the next turn...");
     };
 };
@@ -369,7 +372,7 @@ void PvpMode::swapTurn(SIOClient* client, const std::string& data) {
 void PvpMode::getType(SIOClient* client, const std::string& data) {
     if (std::stoi(data) == 1) {
         this->type = true;
-        auto lbl = Label::createWithTTF("You are player X", "fonts/richela.otf", 64);
+        auto lbl = Label::createWithTTF("You are \n Chicken", "fonts/richela.otf", 32);
         lbl->setPosition(Vec2(100, 400));
         this->addChild(lbl);
 
@@ -377,7 +380,7 @@ void PvpMode::getType(SIOClient* client, const std::string& data) {
     }
     else {
         this->type = false;
-        auto lbl = Label::createWithTTF("You are player O", "fonts/richela.otf", 64);
+        auto lbl = Label::createWithTTF("You are \n Bunny", "fonts/richela.otf", 32);
         lbl->setPosition(Vec2(100, 400));
         this->addChild(lbl);
 
