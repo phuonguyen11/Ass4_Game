@@ -23,4 +23,8 @@ To set up the game UI, follow these steps:
 
 Running the Server
 
-To run the server, please refer to the README file located in the `Server` folder for instructions.
+To run the server:
+
+```
+  node server.js
+```
